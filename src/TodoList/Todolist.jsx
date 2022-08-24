@@ -18,23 +18,21 @@ const Todolist = () => {
             .then((res) => setjobs(res))
     }, [])
 
-    const handleAddJob = () => {
-        const data = {
-            job: "ds",
-            detail: {
-                description: "ggg",
-                priority: 1
-            }
-        }
-        const options = {
-            method: "POST",
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify(data)
-        }
-        fetch("http://localhost:8000/jobs",options)
-            .then((response) => response.json())
-            // .then((res) => setjobs(res))
-    }
+    // const handleAddJob = () => {
+    //     const data = {
+    //         job: "ds",
+    //         detail: {
+    //             description: "ggg",
+    //             priority: 1
+    //         }
+    //     }
+    //     const options = {
+    //         method: "POST",
+    //         headers: {'Content-Type':'application/json'},
+    //         body: JSON.stringify(data)
+    //     }
+    //     fetch("http://localhost:8000/jobs",options)
+    // }
 
 
 
