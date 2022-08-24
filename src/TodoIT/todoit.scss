@@ -1,0 +1,34 @@
+.job-box {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    
+}
+
+.job-detail {
+    display: flex;
+    align-items: center;
+    position: relative;
+    & svg {
+        font-size: 20px !important;
+        position: relative;
+    }
+
+    & p {
+        font-size: 20px;
+        margin-left: 20px;
+        width: 200px;
+    }
+
+    & .job-pri {
+        margin-left: 15px;
+        
+        & .pri {
+            height: 10px;
+            width: 50px;
+            border-radius: 99px;
+            // background-color: #000;
+        }
+    }
+}
