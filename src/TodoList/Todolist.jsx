@@ -11,31 +11,86 @@ const Todolist = () => {
     const [active, setActive] = useState(0)
     const [name, setName] = useState("")
     const [desc, setDesc] = useState("")
+
+    const api = "http://localhost:8000/jobs"
     
     useEffect(() => {
-        fetch("http://localhost:8000/jobs")
+        fetch(api)
             .then((response) => response.json())
             .then((res) => setjobs(res))
     }, [])
 
-    // const handleAddJob = () => {
-    //     const data = {
-    //         job: "ds",
-    //         detail: {
-    //             description: "ggg",
-    //             priority: 1
-    //         }
-    //     }
-    //     const options = {
-    //         method: "POST",
-    //         headers: {'Content-Type':'application/json'},
-    //         body: JSON.stringify(data)
-    //     }
-    //     fetch("http://localhost:8000/jobs",options)
-    // }
+    const handleAddJob = () => {
+        const data = {
+            job: name,
+            detail: {
+                description: desc,
+                priority: active
+            }
+        }
+        const options = {
+            method: "POST",
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(data)
+        }
+        fetch(api,options)
+            
+        fetch(api)
+            .then((response) => response.json())
+            .then((res) => setjobs(res))
+
+        setName("");
+        setDesc("")
+        setActive(0)
+    }
+
+    const handleUpdateJob = (id, name, desc, pri) => {
+
+       const kk = document.querySelector(".job-name-input")
+       const kk1 = document.querySelector(".job-desc-input")
+       kk.value = name
+       kk1.value = desc
+        setActive(pri)
+
+        console.log("ip1 " + kk.value +" ip2 "+kk1.value +" pri" + pri)
+        // const data = {
+        //     job: name,
+        //     detail: {
+        //         description: desc,
+        //         priority: pri
+        //     }
+        // }
+        // const options = {
+        //     method: "PUT",
+        //     headers: {'Content-Type':'application/json'},
+        //     body: JSON.stringify(data)
+        // }
+        // fetch(api+"/"+id,options)
+            
+        // fetch(api)
+        //     .then((response) => response.json())
+        //     .then((res) => setjobs(res))
+
+        // setName("");
+        // setDesc("")
+        // setActive(0)
+    }
+
+    const handleDelJob = (id) => {
+
+        const options = {
+            method: "DELETE",
+        }
+        fetch(api+"/"+id, options)
+
+        fetch(api)
+            .then((response) => response.json())
+            .then((res) => setjobs(res))
+    }
 
 
 
+    // npx json-server --watch db.json --port 8000
     return (
         <div className='todo-modal'>
             <div className='todo-box'>
@@ -46,8 +101,7 @@ const Todolist = () => {
                     </div>
                     
                     <div className='todo-list'>
-                        {jobs ?(
-                        jobs.map((val, index) =>(
+                        {jobs.map((val, index) =>(
                             <div 
                                 className='jobs-item'
                                 key = {index}
@@ -57,13 +111,19 @@ const Todolist = () => {
                                     pri = {val.detail.priority}
                                 />
                                 <div className='job-item-btn'>
-                                    <div className='job-btn-done'>
+                                    <div 
+                                        className='job-btn-done'
+                                        onClick={()=>{handleDelJob(val.id)}}
+                                    >
                                         <div className='btn-content'>
                                             Done
                                             <MdOutlineDownloadDone/>
                                         </div>
                                     </div>
-                                    <div className='job-btn-detail'>
+                                    <div 
+                                        className='job-btn-detail'
+                                        onClick={()=>{handleUpdateJob(val.id, val.job, val.detail.description, val.detail.priority)}}
+                                    >
                                         <div className='btn-content'>
                                             Detail
                                             <CgDetailsMore/>
@@ -71,9 +131,8 @@ const Todolist = () => {
                                     </div>
                                 </div>
                             </div>
-                        ))):(
-                            <div></div>
-                          )}
+                        ))
+                        }
                         
                     </div>
                     <div className='todo-footer'>
@@ -124,7 +183,7 @@ const Todolist = () => {
                         </div>
                         <div className='add-job-btn'>
                                 <div className='add-btn-content'
-                                    // onClick={handleAddJob(name, desc, active)}
+                                    onClick={handleAddJob}
                                 >
                                     <h3>Add</h3>
                                     <BsPlusLg/>

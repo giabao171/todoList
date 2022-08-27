@@ -47,8 +47,6 @@
     padding: 0 30px;
 
     & .jobs-list {
-       
-        height: 100%;
         
     }
     overflow-y: auto;
@@ -60,15 +58,19 @@
     border: 1px solid #000;
     padding: 3px;
     border-radius: 99px ;
+    height: 30px;
 
     & .job-item-btn {
          display: flex;
          margin-left: 10px;
+         height: 25px;
 
          & .job-btn-done {
+            height: 100%;
+            width: 60px;
             display: flex;
             align-items: center;
-            margin-left: 15px;
+            margin-left: 10px;
             cursor: pointer;
             border: 1px solid #fff;
             position: relative;
@@ -88,9 +90,11 @@
         }
     
         & .job-btn-detail {
+            height: 100%;
+            width: 60px;
             display: flex;
             align-items: center;
-            margin-left: 15px;
+            margin-left: 10px;
             cursor: pointer;
             border: 1px solid #fff;
             position: relative;

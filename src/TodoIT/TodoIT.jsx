@@ -9,14 +9,14 @@ const TodoIT = ({jobName, pri}) => {
     return (
         <div className='job-box'>
             <div className='job-detail'>
-                <GrUserWorker/>
+                {/* <GrUserWorker/> */}
                 <p>{jobName}</p>
                 <div className='job-pri'>
                     <div 
                         className='pri'
                         style={pri == 1 ? {backgroundColor: 'red'} : 
-                                pri == 2 ? {backgroundColor: 'green'}:
-                                {backgroundColor: 'yellow'}
+                                pri == 2 ? {backgroundColor: 'yellow'}:
+                                {backgroundColor: 'green'}
                             }
                     ></div>
                 </div>
